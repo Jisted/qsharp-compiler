@@ -108,26 +108,6 @@ namespace Microsoft.Quantum.QsLanguageServer.Testing
         }
 
         [TestMethod]
-        public void LoadOutdatedQsharpProject()
-        {
-            var (projectFile, context) = Context("test9");
-            var projDir = Path.GetDirectoryName(projectFile);
-            Assert.IsNotNull(context);
-            Assert.AreEqual("test9.dll", Path.GetFileName(context.OutputPath));
-            Assert.IsTrue(Path.GetDirectoryName(context.OutputPath).StartsWith(projDir));
-
-            var qsFiles = new string[]
-            {
-                Path.Combine(projDir, "Operation9.qs"),
-            };
-
-            Assert.IsTrue(context.UsesIntrinsics());
-            Assert.IsTrue(context.UsesCanon());
-            Assert.IsFalse(context.UsesXunitHelper());
-            CollectionAssert.AreEquivalent(qsFiles, context.SourceFiles.ToArray());
-        }
-
-        [TestMethod]
         public void LoadQsharpCoreLibraries()
         {
             var (projectFile, context) = Context("test3");
